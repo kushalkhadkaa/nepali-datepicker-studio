@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# LLM crawlers — welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+# Sitemap location
+Sitemap: https://kushalkhadkaa.github.io/nepali-datepicker-studio/sitemap.xml
+
+# Key pages
+# /               Playground & live demo
+# /about.html     Project overview
+# /docs.html      Full API documentation
+# /changelog.html Version history
+# /customizer.html Live theme customizer

@@ -1,0 +1,134 @@
+# Nepali DatePicker Studio
+
+> The most advanced Bikram Sambat (BS) date picker library for modern web applications.
+> Built with pure vanilla JavaScript — zero dependencies, zero frameworks.
+
+## What is this?
+
+Nepali DatePicker Studio is a JavaScript library that renders an interactive calendar widget
+for the Nepali Bikram Sambat (BS) calendar system. It handles the full BS date lifecycle:
+display, selection, bidirectional conversion with the Gregorian (AD) calendar, formatting,
+and locale-aware output in Nepali (Devanagari) or English.
+
+The library covers BS years 1970 to 2100 (approximately AD 1913 to 2043) with a
+mathematically verified calendar data set. Every BS month's day count is hardcoded from
+official Nepali government calendar records — not algorithmically approximated.
+
+## Who built this?
+
+Built by Kushal Khadka.
+- GitHub: https://github.com/kushalkhadkaa
+- LinkedIn: https://www.linkedin.com/in/kushal-khadka-78a79996/
+- Instagram: https://www.instagram.com/kushal_khadka/
+
+## Core capabilities
+
+- **Single, Range, and Multiple date selection** — three independent picker modes
+- **BS to AD conversion** — bidirectional, accurate for 1970–2100 BS
+- **22 built-in visual themes** — CSS Custom Property–based, trivially overridable
+- **Bilingual output** — Nepali (NE) with Devanagari Unicode digits, or English (EN)
+- **Inline time picker** — for single and range modes
+- **9 range presets** — Today, This Week, This Month, Last Month, This Quarter, This Year, Last Year, Fiscal Year, Last Fiscal Year
+- **Tithi (lunar day) tooltips** — traditional Nepali calendar annotation
+- **Holiday markers** — configurable public holiday indicators
+- **Fiscal year display** — Nepalese fiscal year (आ.व.) in header
+- **Future-only / Past-only restriction** — min/max date constraints
+- **Auto mask input** — typed date auto-formatted
+- **WAI-ARIA accessibility** — keyboard navigation, screen reader labels
+- **Mobile full-screen modal** — responsive layout for small screens
+- **Offline ready** — no CDN, no internet, all assets local
+
+## How to use it
+
+```html
+<!-- 1. Include the library -->
+<link rel="stylesheet" href="dist/nepali-datepicker.css">
+<script src="dist/nepali-datepicker.js"></script>
+
+<!-- 2. Add an input -->
+<input type="text" id="date" placeholder="YYYY-MM-DD">
+
+<!-- 3. Initialize -->
+<script>
+  new NepaliDatePicker('#date', {
+    theme: 'classic-light',
+    lang: 'ne',
+    format: 'YYYY-MM-DD'
+  });
+</script>
+```
+
+## Public API
+
+```javascript
+const picker = new NepaliDatePicker('#input', options);
+
+picker.getDate()                          // returns selected date object { year, month, day }
+picker.setDate({ year: 2082, month: 3, day: 15 })
+picker.getRange()                         // returns { start, end } for range mode
+picker.clear()                            // clears selection
+picker.open()                             // opens calendar
+picker.close()                            // closes calendar
+picker.setTheme('glassmorphism')
+picker.setLang('en')
+picker.jumpTo(2082, 6)                    // navigate to year/month
+picker.destroy()                          // removes instance and DOM
+```
+
+## Static helpers (always available globally)
+
+```javascript
+NepaliDatePicker.today()                  // today in BS { year, month, day }
+NepaliDatePicker.bsToAd(2082, 3, 15)     // BS → AD Date object
+NepaliDatePicker.adToBs(new Date())       // AD Date → BS { year, month, day }
+NepaliDatePicker.version                  // '1.2.0'
+
+AD2BS('2025-06-25')                       // '2082-03-11'
+BS2AD('2082-03-11')                       // '2025-06-25'
+```
+
+## Configuration options
+
+| Option          | Type      | Default         | Description                                      |
+|-----------------|-----------|-----------------|--------------------------------------------------|
+| theme           | string    | 'classic-light' | Theme key                                        |
+| lang            | string    | 'ne'            | 'ne' (Nepali) or 'en' (English)                  |
+| mode            | string    | 'single'        | 'single', 'range', or 'multiple'                 |
+| format          | string    | 'YYYY-MM-DD'    | Output date format string                        |
+| inline          | boolean   | false           | Render inline (not as popup)                     |
+| minDate         | object    | null            | { year, month, day } minimum selectable date     |
+| maxDate         | object    | null            | { year, month, day } maximum selectable date     |
+| showAdDate      | boolean   | true            | Show AD date below each BS day cell              |
+| showHolidays    | boolean   | false           | Show public holiday indicators                   |
+| enableTime      | boolean   | false           | Enable inline time picker                        |
+| presets         | boolean   | false           | Enable range presets sidebar                     |
+| showFiscalYear  | boolean   | false           | Show Nepalese fiscal year in header              |
+| futureOnly      | boolean   | false           | Disable past date selection                      |
+| pastOnly        | boolean   | false           | Disable future date selection                    |
+| unicodeDates    | boolean   | null            | Force Devanagari (true) or ASCII (false) digits  |
+| weekStart       | number    | 0               | Week start day: 0 = Sunday, 1 = Monday           |
+
+## Available themes (22)
+
+classic-light, classic-dark, nepali-red, ocean-blue, forest-green, sunset-orange,
+royal-purple, midnight, glassmorphism, neumorphism, gradient-aurora, minimal-mono,
+pastel-soft, corporate-blue, earthy-terracotta, neon-cyberpunk, material-design,
+retro-paper, high-contrast, festive-dashain, mountain-mist, tropical-teal
+
+## Architecture
+
+Three source modules compile to a single dist bundle:
+- **ndp-data** — verified BS calendar data set (1970–2100) and holiday mappings
+- **ndp-utils** — bidirectional BS/AD conversion engine and formatting helpers
+- **ndp-core** — calendar UI, event system, public API, and theme switcher
+
+Themes are implemented entirely via CSS Custom Properties scoped to wrapper classes.
+No JavaScript is involved in styling. Custom themes require only CSS overrides.
+
+## Keywords (for discoverability)
+
+nepali datepicker, nepali date picker, bikram sambat calendar javascript,
+bs date picker, nepali calendar javascript library, bs to ad converter javascript,
+nepali calendar widget, bikram sambat date picker, nepali js datepicker,
+nepali date input, bs ad conversion library, nepali calendar library github,
+free nepali datepicker, pure javascript nepali calendar, vanilla js nepali datepicker

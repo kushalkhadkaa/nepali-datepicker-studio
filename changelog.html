@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    (function() {
+      if (localStorage.getItem('ndp-theme') === 'light') {
+        document.documentElement.classList.add('light-theme');
+      }
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Changelog — Nepali DatePicker Studio</title>
+  <meta name="description" content="Changelog and release notes history for Nepali DatePicker Studio. Tracks features, fixes, and visual theme releases.">
+  <meta name="keywords" content="nepali datepicker changelog, bikram sambat library updates, nepali calendar releases, nepali datepicker version history">
+  <meta name="author" content="Kushal Khadka">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#090d16">
+  <link rel="canonical" href="https://kushalkhadkaa.github.io/nepali-datepicker-studio/changelog.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Changelog — Nepali DatePicker Studio">
+  <meta property="og:description" content="Version history and release notes for Nepali DatePicker Studio.">
+  <meta property="og:url" content="https://kushalkhadkaa.github.io/nepali-datepicker-studio/changelog.html">
+  <meta property="og:site_name" content="Nepali DatePicker Studio">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Changelog — Nepali DatePicker Studio">
+  <meta name="twitter:description" content="Version history, feature releases, and improvements for Nepali DatePicker Studio.">
+
+  <!-- Fonts -->
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  
+  <!-- Library CSS (Bundled) -->
+  <link rel="stylesheet" href="dist/nepali-datepicker.css">
+  
+  <!-- Style System -->
+  <style>
+    :root {
+      --bg-primary: #090d16;
+      --bg-secondary: #0f1524;
+      --bg-tertiary: #172033;
+      --text-primary: #f3f4f6;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+      --accent: #6366f1;
+      --accent-hover: #4f46e5;
+      --border-color: #1f293d;
+      --success: #10b981;
+      --font-sans: 'Roboto Slab', 'Noto Sans Devanagari', serif;
+    }
+
+    html.light-theme {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #f1f5f9;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --accent: #4f46e5;
+      --accent-hover: #4338ca;
+      --border-color: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.05) 0px, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      flex-shrink: 0;
+      transition: background 0.3s ease;
+    }
+
+    html.light-theme header {
+      background: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .logo-icon {
+      font-size: 1.5rem;
+    }
+
+    .logo-text {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      background: linear-gradient(135deg, #fff 30%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    html.light-theme .logo-text {
+      background: linear-gradient(135deg, #090d16 30%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-links a.active {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .btn-nav-customizer {
+      background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
+      color: #fff !important;
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+    }
+
+    /* Theme Switcher Button */
+    .theme-switcher-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      padding: 0;
+      line-height: 1;
+    }
+    .theme-switcher-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.05);
+    }
+    html.light-theme .theme-switcher-btn {
+      background: rgba(0, 0, 0, 0.04);
+    }
+    html.light-theme .theme-switcher-btn:hover {
+      background: rgba(0, 0, 0, 0.08);
+    }
+    html:not(.light-theme) .theme-icon-light { display: inline; }
+    html:not(.light-theme) .theme-icon-dark { display: none; }
+    html.light-theme .theme-icon-light { display: none; }
+    html.light-theme .theme-icon-dark { display: inline; }
+
+    /* Main Container */
+    .main-container {
+      max-width: 900px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .page-desc {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    /* Timeline Styling */
+    .timeline {
+      position: relative;
+      border-left: 2px solid var(--border-color);
+      margin-left: 1.5rem;
+      padding-left: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: calc(-2.5rem - 9px);
+      top: 6px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg-primary);
+      box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+      z-index: 2;
+    }
+
+    .timeline-version-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: rgba(99, 102, 241, 0.15);
+      color: var(--accent);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      margin-bottom: 0.75rem;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+
+    .timeline-date {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-left: 0.75rem;
+    }
+
+    .timeline-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.75rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+      border-color: rgba(99, 102, 241, 0.3);
+    }
+
+    .timeline-card-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .change-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .change-list li {
+      position: relative;
+      padding-left: 1.5rem;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .change-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .tag-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      margin-right: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .tag-feature {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .tag-fix {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .tag-perf {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 3rem 0;
+      background: #05080e;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    html.light-theme footer {
+      background: #f1f5f9 !important;
+    }
+
+    footer a {
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo-area">
+        <span class="logo-text">Nepali DatePicker <span style="color: var(--accent);">Studio</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Playground</a></li>
+        <li><a href="customizer.html">Customizer</a></li>
+        <li><a href="docs.html">API Docs</a></li>
+        <li><a href="changelog.html" class="active">Changelog</a></li>
+        <li><a href="about.html">About Developer</a></li>
+        <li>
+          <button id="theme-switcher-btn" class="theme-switcher-btn" aria-label="Toggle Theme" type="button">
+            <span class="theme-icon-light">&#9728; Light</span>
+            <span class="theme-icon-dark">&#9790; Dark</span>
+          </button>
+        </li>
+        <li><a href="customizer.html" class="btn-nav-customizer">Live Customizer</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="main-container">
+    <h1 class="page-title">Release Notes & Changelog</h1>
+    <p class="page-desc">Stay up to date with the latest releases, performance improvements, and fixes for Nepali DatePicker Studio.</p>
+
+    <div class="timeline">
+      
+      <!-- Version 1.1.0 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <span class="timeline-version-badge">v1.1.0</span>
+          <span class="timeline-date">June 2026 (Current Release)</span>
+        </div>
+        <div class="timeline-card">
+          <h3 class="timeline-card-title">Performance Tuning, Time Picker Integration & Layout Fixes</h3>
+          <ul class="change-list">
+            <li><span class="tag-badge tag-feature">Feature</span><strong>Light / Dark Theme Switcher</strong>: Built a client-side theme switcher utilizing CSS custom property variables and localStorage to persist preference states across page reloads.</li>
+            <li><span class="tag-badge tag-feature">Feature</span><strong>Range Presets Sidebar</strong>: Integrated quick date range presets for single-click selection of common intervals, including Nepalese Fiscal Year (आ.व.) ranges.</li>
+            <li><span class="tag-badge tag-feature">Feature</span><strong>Dual Time Picker</strong>: Embedded hour and minute selector dropdown inputs in the calendar panel footer to allow simultaneous date and time capture.</li>
+            <li><span class="tag-badge tag-feature">Feature</span><strong>Weekday & Boundary Constraints</strong>: Enabled disabling specific days of the week (e.g. Saturdays) and setting hard `minDate` and `maxDate` boundaries.</li>
+            <li><span class="tag-badge tag-fix">Fix</span><strong>Memory Leak Cleanup</strong>: Refactored month navigation rendering to reuse a single document fragment instead of continuously recreating calendar container nodes.</li>
+            <li><span class="tag-badge tag-fix">Fix</span><strong>Stray Character Input Masking</strong>: Handled manual keypress typing events to automatically block invalid alphabetic characters and enforce formatting rules.</li>
+            <li><span class="tag-badge tag-fix">Fix</span><strong>Z-Index Modals Stacking</strong>: Resolved overlay conflict bugs in relative layouts by absolute-positioning the picker panel dynamically on viewport focus.</li>
+            <li><span class="tag-badge tag-fix">Fix</span><strong>Auto-Reset Range Selection Bounds</strong>: Fixed range selection limits so that selecting a start date chronologically after an end date auto-resets the endpoint instead of breaking calculations.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Version 1.0.0 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <span class="timeline-version-badge">v1.0.0</span>
+          <span class="timeline-date">May 2026</span>
+        </div>
+        <div class="timeline-card">
+          <h3 class="timeline-card-title">Initial Release</h3>
+          <ul class="change-list">
+            <li><span class="tag-badge tag-feature">Feature</span><strong>Core BS-AD Converter Engine</strong>: Mapped high-precision mathematical calendar mapping lookup matrices for Bikram Sambat years 1970 to 2100.</li>
+            <li><span class="tag-badge tag-feature">Feature</span><strong>22 Pre-Designed CSS Themes</strong>: Shipped built-in styling sheets (including midnight, glassmorphism, corporate) configured fully via custom CSS properties.</li>
+            <li><span class="tag-badge tag-feature">Feature</span><strong>Vanilla JS Footprint</strong>: Designed the widget as a lightweight, zero-dependency drop-in library to ensure framework compatibility.</li>
+            <li><span class="tag-badge tag-feature">Feature</span><strong>Focus & Keyboard Controls</strong>: Enabled complete navigation of month/year panels and day cells using arrow keys, Esc, and Enter.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <div>&copy; 2026 Nepali DatePicker Studio. Created by Kushal Khadka.</div>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="index.html">Playground</a>
+        <a href="customizer.html">Live Customizer</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Theme switcher click listener
+      const themeSwitcher = document.getElementById('theme-switcher-btn');
+      if (themeSwitcher) {
+        themeSwitcher.addEventListener('click', function() {
+          document.documentElement.classList.toggle('light-theme');
+          const currentTheme = document.documentElement.classList.contains('light-theme') ? 'light' : 'dark';
+          localStorage.setItem('ndp-theme', currentTheme);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
