@@ -82,6 +82,110 @@ The browser only needs:
 <script src="dist/nepali-datepicker.js"></script>
 ```
 
+## System Architecture
+
+Nepali DatePicker Studio is designed as a static, dependency-free frontend library. It does not require a server, database, package manager, or runtime framework. The browser loads one CSS bundle and one JavaScript bundle, then the library attaches datepicker behavior to normal HTML elements.
+
+```text
+HTML page
+  |
+  |-- dist/nepali-datepicker.css
+  |     |
+  |     |-- base calendar layout
+  |     |-- 22 theme definitions
+  |     |-- responsive/mobile styles
+  |     |-- animation and state classes
+  |
+  |-- dist/nepali-datepicker.js
+        |
+        |-- Calendar data layer
+        |     |-- BS month length table from 1970 BS to 2100 BS
+        |     |-- month names, weekday names, digit maps
+        |     |-- holiday/festival metadata
+        |
+        |-- Utility/conversion layer
+        |     |-- BS date validation
+        |     |-- AD date validation
+        |     |-- BS to AD conversion
+        |     |-- AD to BS conversion
+        |     |-- formatting and digit conversion
+        |
+        |-- DatePicker UI layer
+        |     |-- input binding
+        |     |-- popup/inline rendering
+        |     |-- month/year navigation
+        |     |-- single/range/multiple selection
+        |     |-- time picker, presets, callbacks
+        |
+        |-- Converter widget layer
+              |-- standalone BS/AD conversion panel
+              |-- reusable dashboard-style converter UI
+```
+
+### Runtime Flow
+
+```text
+Developer creates input
+        |
+        v
+new NepaliDatePicker('#input', options)
+        |
+        v
+Options are normalized and internal state is prepared
+        |
+        v
+User clicks/focuses input
+        |
+        v
+Picker builds calendar DOM and renders current BS month
+        |
+        v
+User selects date, range, multiple dates, or time
+        |
+        v
+Library validates selection and converts BS <-> AD when needed
+        |
+        v
+Formatted value is written to input
+        |
+        v
+Callbacks run and optional hidden AD field is synchronized
+```
+
+### Layer Responsibilities
+
+| Layer | Responsibility | Main Output |
+|---|---|---|
+| Calendar data | Stores verified BS calendar facts | Month lengths, names, holidays |
+| Conversion utilities | Converts and validates BS/AD dates | Date objects and formatted values |
+| Picker core | Builds and controls the interactive UI | Calendar popup/inline widget |
+| Theme system | Applies visual design through CSS variables | 22 ready-made themes |
+| Page assets | Power the demo, docs, and customizer pages | Public showcase website |
+| SEO/AI files | Help search engines and AI tools understand the project | `robots.txt`, `sitemap.xml`, `llms.txt` |
+
+### Data Flow for a Selected Date
+
+```text
+User selects BS date
+  -> picker receives year/month/day
+  -> min/max/disabled rules are checked
+  -> BS date is converted to AD using day-offset calculation
+  -> output formatter applies format/language/digit rules
+  -> input value is updated
+  -> onChange/onRangeChange callback receives structured data
+  -> optional exportAdInput receives Gregorian date value
+```
+
+### Why This Architecture
+
+The project intentionally keeps the public runtime simple:
+
+- Static files are easy to host on GitHub Pages, shared hosting, Laravel, WordPress, or plain HTML sites.
+- No npm build step means users can copy `dist/` directly into a project.
+- The BS conversion logic is bundled locally, so the picker works offline.
+- CSS themes are separated from date logic, making visual customization safer.
+- The customizer and docs pages are separate from the library bundle, so production users only need `dist/`.
+
 ## Conversion Algorithm
 
 The BS/AD conversion is lookup-table based, not an approximate formula.
