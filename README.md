@@ -6,15 +6,35 @@ Nepali DatePicker Studio turns ordinary HTML inputs into interactive Nepali cale
 
 [Live demo](https://kushalkhadkaa.github.io/nepali-datepicker-studio/) · [API docs](https://kushalkhadkaa.github.io/nepali-datepicker-studio/docs.html) · [Customizer](https://kushalkhadkaa.github.io/nepali-datepicker-studio/customizer.html)
 
+## Introduction
+
+Most web projects in Nepal eventually need to accept dates in Bikram Sambat while still storing or exchanging Gregorian dates with databases, APIs, analytics systems, and international tools. Nepali DatePicker Studio solves that problem as a drop-in frontend library.
+
+It gives users a familiar Nepali calendar interface and gives developers reliable structured data. A selected date can be displayed in Nepali, formatted in English, converted to AD, written to a hidden backend field, used inside a booking workflow, or styled through a custom theme without changing the core library.
+
+The project is designed for public websites, dashboards, booking systems, admin panels, hospital systems, travel flows, event forms, and any HTML form that needs a clean Nepali date experience.
+
 ## Screenshots
 
-### Playground
+### Datepicker Widget
 
-![Nepali DatePicker Studio playground](assets/screenshots/playground.png)
+![Nepali DatePicker Studio datepicker widget](assets/screenshots/datepicker-widget.png)
 
 ### Live Theme Customizer
 
-![Nepali DatePicker Studio customizer](assets/screenshots/customizer.png)
+![Nepali DatePicker Studio light customizer](assets/screenshots/customizer-light.png)
+
+### Theme Gallery
+
+![Nepali DatePicker Studio theme gallery](assets/screenshots/theme-gallery.png)
+
+### Custom Cell Renderer
+
+![Nepali DatePicker Studio custom cell renderer](assets/screenshots/custom-cell-renderer.png)
+
+### Playground Overview
+
+![Nepali DatePicker Studio playground](assets/screenshots/playground.png)
 
 ### API Documentation
 
@@ -62,6 +82,28 @@ The library is useful for:
 - Offline-ready local fonts and assets
 - MIT licensed
 
+## Lightweight by Design
+
+Nepali DatePicker Studio is intentionally simple to ship:
+
+- No runtime dependencies
+- No jQuery
+- No React/Vue/Angular requirement
+- No npm install required for browser usage
+- No database lookup at runtime
+- No remote API call for conversion
+- No CDN required
+- Works from static hosting
+
+The public integration surface is only two files:
+
+```html
+<link rel="stylesheet" href="dist/nepali-datepicker.css">
+<script src="dist/nepali-datepicker.js"></script>
+```
+
+All calendar data, conversion utilities, UI behavior, themes, and helper APIs are bundled locally. That makes the picker easy to use in static HTML, PHP, Laravel, Django templates, WordPress themes, admin dashboards, and GitHub Pages.
+
 ## How It Works
 
 The library has three main layers:
@@ -81,6 +123,39 @@ The browser only needs:
 <link rel="stylesheet" href="dist/nepali-datepicker.css">
 <script src="dist/nepali-datepicker.js"></script>
 ```
+
+## Easy to Use
+
+The simplest setup takes three steps:
+
+1. Load the CSS and JavaScript bundle.
+2. Add a normal HTML input.
+3. Initialize `NepaliDatePicker` with a selector.
+
+```html
+<link rel="stylesheet" href="dist/nepali-datepicker.css">
+
+<input type="text" id="date" placeholder="Select Nepali date">
+
+<script src="dist/nepali-datepicker.js"></script>
+<script>
+  new NepaliDatePicker('#date');
+</script>
+```
+
+For advanced forms, pass options:
+
+```javascript
+new NepaliDatePicker('#date', {
+  theme: 'classic-light',
+  lang: 'ne',
+  mode: 'range',
+  showAdDate: true,
+  exportAdInput: '#ad-date'
+});
+```
+
+The same API works for single dates, ranges, multiple selection, inline calendars, date-time pickers, and booking flows.
 
 ## System Architecture
 
@@ -185,6 +260,32 @@ The project intentionally keeps the public runtime simple:
 - The BS conversion logic is bundled locally, so the picker works offline.
 - CSS themes are separated from date logic, making visual customization safer.
 - The customizer and docs pages are separate from the library bundle, so production users only need `dist/`.
+
+### Public Release Architecture
+
+The GitHub release is intentionally organized so users can run the project immediately:
+
+```text
+Public website pages
+  -> index.html, customizer.html, docs.html, about.html, changelog.html
+
+Reusable library files
+  -> dist/nepali-datepicker.css
+  -> dist/nepali-datepicker.js
+
+Demo and documentation assets
+  -> assets/css/
+  -> assets/js/
+  -> assets/fonts/
+  -> assets/screenshots/
+
+Search and AI discovery
+  -> robots.txt
+  -> sitemap.xml
+  -> llms.txt
+```
+
+Users who only want the datepicker in their own project need the `dist/` files. Users who want to explore the full demo can open the GitHub Pages site.
 
 ## Conversion Algorithm
 
@@ -298,6 +399,28 @@ Initialize:
   });
 </script>
 ```
+
+## Quick Start for Production
+
+For a production form, the most common pattern is to display BS to the user and submit AD to the server:
+
+```html
+<label for="booking-date">Booking date</label>
+<input type="text" id="booking-date" placeholder="Select BS date">
+<input type="hidden" id="booking-date-ad" name="booking_date_ad">
+
+<script src="dist/nepali-datepicker.js"></script>
+<script>
+  new NepaliDatePicker('#booking-date', {
+    lang: 'ne',
+    format: 'YYYY-MM-DD',
+    showAdDate: true,
+    exportAdInput: '#booking-date-ad'
+  });
+</script>
+```
+
+This gives the user a Nepali datepicker while keeping the backend value in a standard Gregorian format.
 
 ## Usage Examples
 
@@ -493,6 +616,56 @@ Nepali DatePicker Studio is designed for modern browsers:
 - Safari
 - Edge
 - Opera
+
+## FAQ
+
+### Is this open source?
+
+Yes. Nepali DatePicker Studio is released under the MIT License.
+
+### Does it need jQuery?
+
+No. The library is pure vanilla JavaScript and CSS.
+
+### Does it need npm or a build system?
+
+No. For normal browser usage, copy `dist/nepali-datepicker.css` and `dist/nepali-datepicker.js` into your project and include them with HTML tags.
+
+### Does it work offline?
+
+Yes. The calendar data, conversion logic, styles, fonts, and widgets are local files. No remote API call is required for date conversion.
+
+### How accurate is the BS/AD conversion?
+
+The conversion uses static BS month-length data and day-offset calculation from a known reference date. It is not a rough year-difference formula.
+
+### What date range is supported?
+
+The included calendar data covers 1970 BS to 2100 BS.
+
+### Can I store AD dates in my database?
+
+Yes. Use `exportAdInput` to synchronize the selected BS date into a hidden AD input field.
+
+### Can I customize the design?
+
+Yes. The library includes 22 themes and a live customizer. Themes are CSS-variable based, so you can override colors without editing the core JavaScript.
+
+### Can I use it for hotel check-in and checkout?
+
+Yes. The picker supports date ranges, time selection, minimum date updates, and booking-specific date-time formats.
+
+### Can I disable past or future dates?
+
+Yes. Use `futureOnly`, `pastOnly`, `minDate`, `maxDate`, `disabledDates`, or `disabledDaysOfWeek`.
+
+### Can I highlight special dates?
+
+Yes. Use the `renderDay(day, cell)` hook to add classes, styles, labels, or tooltips to specific calendar cells.
+
+### Is this only for Nepali language?
+
+No. It supports Nepali and English UI/output, including optional Devanagari digit rendering.
 
 ## AI and Search Friendliness
 
