@@ -16,29 +16,41 @@ The project is designed for public websites, dashboards, booking systems, admin 
 
 ## Screenshots
 
-### Datepicker Widget
-
+### Datepicker Widget (Bilingual Popup)
 ![Nepali DatePicker Studio datepicker widget](assets/screenshots/datepicker-widget.png)
+*Standard bilingual (Nepali/English) calendar popover picker with integrated active date markers and navigation controls.*
 
 ### Live Theme Customizer
-
 ![Nepali DatePicker Studio light customizer](assets/screenshots/customizer-light.png)
+*Real-time reactive theme designer panel allowing instant customization of CSS color properties and functional logic.*
 
-### Theme Gallery
-
+### Theme Gallery Card Grid
 ![Nepali DatePicker Studio theme gallery](assets/screenshots/theme-gallery.png)
+*Visual gallery showcasing the 22 pre-designed visual themes (classic, glassmorphism, midnight, neon-cyberpunk).*
 
-### Custom Cell Renderer
-
+### Custom Day Cell Renderer
 ![Nepali DatePicker Studio custom cell renderer](assets/screenshots/custom-cell-renderer.png)
+*Interactive custom day decorator highlighting specific dates dynamically (e.g. custom markers, holidays, or business closures).*
 
-### Playground Overview
+### Range Presets Sidebar
+![Nepali DatePicker Studio range presets](assets/screenshots/range-presets.png)
+*Range selection sidebar presenting 9 pre-configured duration ranges (this month, fiscal year, elapsed durations).*
 
+### Standalone BS ↔ AD Calendar Converter
+![Nepali DatePicker Studio converter widget](assets/screenshots/converter-widget.png)
+*Standalone date converter tool supporting bi-directional BS/AD transformations and difference calculations.*
+
+### Strict API Configuration Presets
+![Nepali DatePicker Studio strict api presets](assets/screenshots/strict-api-presets.png)
+*Live interactive code playground showing official API parameters, constraints, and disablers.*
+
+### Advanced Playground Overview
 ![Nepali DatePicker Studio playground](assets/screenshots/playground.png)
+*Development playground showcase dashboard with code generation drawers and styling presets.*
 
-### API Documentation
-
+### API Documentation Panel
 ![Nepali DatePicker Studio documentation](assets/screenshots/docs.png)
+*Fully documented API reference index outlining methods, options, callback events, and conversion formulas.*
 
 ## What It Does
 
