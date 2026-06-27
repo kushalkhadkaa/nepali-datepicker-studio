@@ -8,7 +8,12 @@ scratch/
 .claude/
 
 # Build artifacts & binaries
+node_modules/
 nepali-datepicker-pro.zip
+*.tgz
+test-results/
+playwright-report/
+tests/screenshots/
 
 # Documentation & meta (not needed to run)
 *.md

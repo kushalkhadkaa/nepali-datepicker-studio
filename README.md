@@ -816,6 +816,25 @@ It checks:
 - MIT license signal
 - package entrypoints
 
+Additional developer checks are available for maintainers:
+
+```bash
+npm run pack:check
+npm run test:browser
+```
+
+`npm run pack:check` previews the files that would be included in a future npm package. `npm run test:browser` runs Playwright smoke tests against the public pages, opens the picker, verifies the customizer generator, checks converter helpers, and writes screenshots to `tests/screenshots/`.
+
+The package is prepared for a future npm publish with:
+
+- `main` pointing to `dist/nepali-datepicker.js`
+- `style` pointing to `dist/nepali-datepicker.css`
+- `types` pointing to `dist/nepali-datepicker.d.ts`
+- package `exports`
+- package `files` whitelist
+- public publish configuration
+- optional Playwright browser smoke tests
+
 ## Project Status
 
 Nepali DatePicker Studio is public and open source under the MIT License. The project is suitable for production evaluation, static demos, learning, and integration into real applications that need a Nepali calendar experience.

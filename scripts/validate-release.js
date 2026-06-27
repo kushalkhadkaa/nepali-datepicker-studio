@@ -19,6 +19,7 @@ const requiredFiles = [
   ...publicPages,
   "dist/nepali-datepicker.js",
   "dist/nepali-datepicker.css",
+  "dist/nepali-datepicker.d.ts",
   "assets/js/about.js",
   "assets/js/changelog.js",
   "assets/js/customizer.js",
@@ -36,6 +37,9 @@ const requiredFiles = [
   "robots.txt",
   "sitemap.xml",
   "package.json",
+  "package-lock.json",
+  "playwright.config.js",
+  "tests/browser-smoke.spec.js",
 ];
 
 function absolute(file) {
@@ -86,7 +90,7 @@ function checkRequiredFiles() {
 
 function checkPackageEntrypoints() {
   const pkg = JSON.parse(read("package.json"));
-  const fields = ["main", "style"];
+  const fields = ["main", "style", "types", "browser"];
 
   for (const field of fields) {
     if (!pkg[field]) {
@@ -103,6 +107,22 @@ function checkPackageEntrypoints() {
   if (pkg.license !== "MIT") {
     fail("package.json license must remain MIT for the open-source release.");
   }
+
+  if (!Array.isArray(pkg.files) || !pkg.files.includes("dist/")) {
+    fail("package.json files must include dist/ for npm publish readiness.");
+  }
+
+  if (!pkg.exports || !pkg.exports["."] || pkg.exports["."].types !== "./dist/nepali-datepicker.d.ts") {
+    fail("package.json exports must expose the TypeScript declaration file.");
+  }
+
+  if (!pkg.publishConfig || pkg.publishConfig.access !== "public") {
+    fail("package.json publishConfig.access must be public.");
+  }
+
+  if (!pkg.scripts || !pkg.scripts["test:browser"] || !pkg.scripts["pack:check"]) {
+    fail("package.json must include test:browser and pack:check scripts.");
+  }
 }
 
 function checkJavaScriptSyntax() {
@@ -110,6 +130,8 @@ function checkJavaScriptSyntax() {
     ...walk("dist", (file) => file.endsWith(".js")),
     ...walk("assets/js", (file) => file.endsWith(".js")),
     "scripts/validate-release.js",
+    "playwright.config.js",
+    "tests/browser-smoke.spec.js",
   ].sort();
 
   for (const file of files) {
