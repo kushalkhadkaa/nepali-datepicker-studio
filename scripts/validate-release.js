@@ -30,6 +30,7 @@ const requiredFiles = [
   "assets/css/customizer.css",
   "assets/css/docs.css",
   "assets/css/playground.css",
+  "README.md",
   "LICENSE",
   "llms.txt",
   "robots.txt",
@@ -184,11 +185,33 @@ function checkSitemapAndRobots() {
   }
 }
 
+function checkReadmeScreenshots() {
+  const readme = read("README.md");
+  const screenshotLinks = [...readme.matchAll(/\]\((assets\/screenshots\/[^)]+)\)/g)].map((match) => match[1]);
+
+  if (screenshotLinks.length < 4) {
+    fail("README.md should include several screenshot references for GitHub readers.");
+  }
+
+  for (const file of screenshotLinks) {
+    if (!exists(file)) {
+      fail(`README.md references a missing screenshot: ${file}`);
+    }
+  }
+}
+
 function checkOpenSourceSignals() {
+  const readme = read("README.md");
   const license = read("LICENSE");
 
   if (!/MIT License/i.test(license)) {
     fail("LICENSE must include the MIT License heading.");
+  }
+
+  for (const section of ["Introduction", "System Architecture", "Conversion Algorithm", "DatePicker Algorithm", "FAQ"]) {
+    if (!readme.includes(`## ${section}`)) {
+      fail(`README.md is missing the "${section}" section.`);
+    }
   }
 }
 
@@ -198,6 +221,7 @@ checkJavaScriptSyntax();
 checkCssFiles();
 checkHtmlSeo();
 checkSitemapAndRobots();
+checkReadmeScreenshots();
 checkOpenSourceSignals();
 
 if (failures.length > 0) {

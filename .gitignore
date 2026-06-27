@@ -13,6 +13,7 @@ nepali-datepicker-pro.zip
 # Documentation & meta (not needed to run)
 *.md
 **/*.md
+!README.md
 LICENSE
 
 # Source — kept private locally, only dist/ is published
