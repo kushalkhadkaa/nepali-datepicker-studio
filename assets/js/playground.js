@@ -707,6 +707,51 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       // =========================================================================
+      // Strict API Demonstration Presets Initialization
+      // =========================================================================
+      if (window.NepaliDatePicker) {
+        // 1. Date Formats (8 Formats)
+        new NepaliDatePicker('#fmt-ymd-picker', { theme: 'classic-light', lang: 'en', dateFormat: 'YYYY-MM-DD' });
+        new NepaliDatePicker('#fmt-ysmsd-picker', { theme: 'classic-light', lang: 'en', dateFormat: 'YYYY/MM/DD' });
+        new NepaliDatePicker('#fmt-ydmd-picker', { theme: 'classic-light', lang: 'en', dateFormat: 'YYYY.MM.DD' });
+        new NepaliDatePicker('#fmt-dmy-picker', { theme: 'classic-light', lang: 'en', dateFormat: 'DD-MM-YYYY' });
+        new NepaliDatePicker('#fmt-dsmsy-picker', { theme: 'classic-light', lang: 'en', dateFormat: 'DD/MM/YYYY' });
+        new NepaliDatePicker('#fmt-ddmdy-picker', { theme: 'classic-light', lang: 'en', dateFormat: 'DD.MM.YYYY' });
+        new NepaliDatePicker('#fmt-mdy-picker', { theme: 'classic-light', lang: 'en', dateFormat: 'MM-DD-YYYY' });
+        new NepaliDatePicker('#fmt-msdsy-picker', { theme: 'classic-light', lang: 'en', dateFormat: 'MM/DD/YYYY' });
+        new NepaliDatePicker('#fmt-ad-long-picker', { theme: 'classic-light', lang: 'en', dateFormat: 'DD MMMM YYYY' });
+
+        // 2. Min Max Boundaries select limits
+        new NepaliDatePicker('#min-date-strict-picker', { theme: 'classic-light', lang: 'en', minDate: { year: 2083, month: 3, day: 3 } });
+        new NepaliDatePicker('#max-date-strict-picker', { theme: 'classic-light', lang: 'en', maxDate: { year: 2083, month: 3, day: 13 } });
+        new NepaliDatePicker('#min-max-strict-picker', {
+          theme: 'classic-light',
+          lang: 'en',
+          minDate: { year: 2083, month: 3, day: 3 },
+          maxDate: { year: 2083, month: 3, day: 13 }
+        });
+
+        // 3. Dynamic Selection Callbacks & Animations
+        new NepaliDatePicker('#callback-strict-picker', {
+          theme: 'classic-light',
+          lang: 'en',
+          onChange: function(date) {
+            alert('Selected date details: ' + JSON.stringify(date));
+          }
+        });
+        new NepaliDatePicker('#anim-slide-strict-picker', { theme: 'classic-light', lang: 'en', animation: 'slide' });
+        new NepaliDatePicker('#anim-fade-strict-picker', { theme: 'classic-light', lang: 'en', animation: 'fade' });
+
+        // 4. Advanced Selection Disablers
+        new NepaliDatePicker('#disable-today-strict-picker', { theme: 'classic-light', lang: 'en', disableToday: true });
+        new NepaliDatePicker('#disable-date-strict-picker', { theme: 'classic-light', lang: 'en', disableDates: ['2083-3-9'] });
+        new NepaliDatePicker('#disable-array-strict-picker', { theme: 'classic-light', lang: 'en', disableDates: ['2083-3-1', '2083-3-15', '2083-3-28'] });
+        new NepaliDatePicker('#disable-before-strict-picker', { theme: 'classic-light', lang: 'en', disableDaysBefore: 5 });
+        new NepaliDatePicker('#disable-after-strict-picker', { theme: 'classic-light', lang: 'en', disableDaysAfter: 5 });
+        new NepaliDatePicker('#disable-both-strict-picker', { theme: 'classic-light', lang: 'en', disableDaysBefore: 5, disableDaysAfter: 5 });
+      }
+
+      // =========================================================================
       // Dynamic Booking & Reservation Template Initialization (Styles 1-7)
       // Mappings and config specs for Hotel, Hospital, Flight, Event, and Restaurant
       // =========================================================================
@@ -855,6 +900,100 @@ document.addEventListener('DOMContentLoaded', function() {
               }
             });
           }
+        }
+      }
+
+      // Static Conversion & Helper Functions Live Calculations
+      if (window.NDPUtils) {
+        const digIn = document.getElementById('helper-digit-in');
+        const digOut = document.getElementById('helper-digit-out');
+        const updateDigits = () => {
+          if (window.Get2DigitNo && digIn) {
+            digOut.innerText = window.Get2DigitNo(digIn.value);
+          }
+        };
+        if (digIn) {
+          digIn.addEventListener('input', updateDigits);
+          updateDigits();
+        }
+
+        const uniIn = document.getElementById('helper-unicode-in');
+        const uniOut = document.getElementById('helper-unicode-out');
+        const numOut = document.getElementById('helper-number-out');
+        const updateUnicodeHelpers = () => {
+          if (uniIn && window.ConvertToUnicode && window.ConvertToNumber) {
+            const unicodeStr = window.ConvertToUnicode(uniIn.value);
+            if (uniOut) uniOut.innerText = unicodeStr;
+            if (numOut) numOut.innerText = window.ConvertToNumber(unicodeStr);
+          }
+        };
+        if (uniIn) {
+          uniIn.addEventListener('input', updateUnicodeHelpers);
+          updateUnicodeHelpers();
+        }
+
+        const wordsIn = document.getElementById('helper-words-in');
+        const wordsEnOut = document.getElementById('helper-words-en-out');
+        const wordsNpOut = document.getElementById('helper-words-np-out');
+        const updateWords = () => {
+          if (wordsIn && window.NumberToWords && window.NumberToWordsUnicode) {
+            if (wordsEnOut) wordsEnOut.innerText = window.NumberToWords(+wordsIn.value);
+            if (wordsNpOut) wordsNpOut.innerText = window.NumberToWordsUnicode(+wordsIn.value);
+          }
+        };
+        if (wordsIn) {
+          wordsIn.addEventListener('input', updateWords);
+          updateWords();
+        }
+
+        const dateIn = document.getElementById('helper-date-in');
+        const ad2bsOut = document.getElementById('helper-ad2bs-out');
+        const bs2adOut = document.getElementById('helper-bs2ad-out');
+        const updateDateConverterHelpers = () => {
+          if (dateIn && window.AD2BS && window.BS2AD) {
+            if (ad2bsOut) ad2bsOut.innerText = window.AD2BS(dateIn.value);
+            try {
+              if (bs2adOut) bs2adOut.innerText = window.BS2AD(ad2bsOut.innerText || '2083-03-11');
+            } catch (e) {
+              if (bs2adOut) bs2adOut.innerText = 'Error';
+            }
+          }
+        };
+        if (dateIn) {
+          dateIn.addEventListener('input', updateDateConverterHelpers);
+          updateDateConverterHelpers();
+        }
+
+        const parseIn = document.getElementById('helper-parse-in');
+        const parseOut = document.getElementById('helper-parse-out');
+        const dateObjOut = document.getElementById('helper-dateobj-out');
+        const updateParserHelpers = () => {
+          if (parseIn && window.ParseDate && window.ConvertToDateObject) {
+            const parsedObj = window.ParseDate(parseIn.value);
+            if (parseOut) parseOut.innerText = JSON.stringify(parsedObj);
+            const dateObj = window.ConvertToDateObject(parseIn.value);
+            if (dateObjOut) dateObjOut.innerText = dateObj ? dateObj.toDateString() : 'null';
+          }
+        };
+        if (parseIn) {
+          parseIn.addEventListener('input', updateParserHelpers);
+          updateParserHelpers();
+        }
+
+        if (window.AD) {
+          const adCurrDate = document.getElementById('ad-curr-date');
+          const adMonths = document.getElementById('ad-months');
+          if (adCurrDate) adCurrDate.innerText = window.AD.GetCurrentDate().toDateString();
+          if (adMonths) adMonths.innerText = window.AD.GetMonths().slice(0, 3).join(', ') + '...';
+        }
+        if (window.BS) {
+          const bsCurr = window.BS.GetCurrentDate();
+          const bsCurrDate = document.getElementById('bs-curr-date');
+          const bsMonthsUni = document.getElementById('bs-months-uni');
+          const bsDiff = document.getElementById('bs-diff');
+          if (bsCurrDate) bsCurrDate.innerText = `${bsCurr.year}-${bsCurr.month}-${bsCurr.day}`;
+          if (bsMonthsUni) bsMonthsUni.innerText = window.BS.GetMonthsInUnicode().slice(0, 3).join(', ') + '...';
+          if (bsDiff) bsDiff.innerText = window.BS.DatesDiff({ year: 2083, month: 3, day: 1 }, { year: 2083, month: 3, day: 11 }) + ' days';
         }
       }
     });
