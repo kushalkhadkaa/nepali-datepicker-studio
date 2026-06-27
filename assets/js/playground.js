@@ -706,7 +706,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       }
 
+      // =========================================================================
       // Dynamic Booking & Reservation Template Initialization (Styles 1-7)
+      // Mappings and config specs for Hotel, Hospital, Flight, Event, and Restaurant
+      // =========================================================================
       const serviceConfigs = {
         hotel: {
           titleStart: "🏨 Check-in Details",
