@@ -776,6 +776,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let endPicker = null;
 
         if (startEl && endEl) {
+          // Perform sequential date-time validity checks
           const validateDates = () => {
             if (!startPicker || !endPicker) return;
             const startVal = startPicker.getDate();
@@ -784,6 +785,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (startVal && endVal) {
               const startObj = { year: startVal.year, month: startVal.month, day: startVal.day };
               const endObj = { year: endVal.year, month: endVal.month, day: endVal.day };
+              
+              // 1. Compare Year-Month-Day coordinates
               const comp = window.NDPUtils.compareBsDates(endObj, startObj);
 
               if (comp < 0) {
@@ -791,6 +794,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (alertTextEl) alertTextEl.innerText = serviceConfigs[catSelect.value].alertMsg;
                 endPicker.clear();
               } else if (comp === 0 && startPicker._opts.enableTime && endPicker._opts.enableTime) {
+                // 2. Dates are identical: compare hours & minutes since midnight
                 const startMins = (startVal.hour || 0) * 60 + (startVal.minute || 0);
                 const endMins = (endVal.hour || 0) * 60 + (endVal.minute || 0);
                 if (endMins < startMins) {
