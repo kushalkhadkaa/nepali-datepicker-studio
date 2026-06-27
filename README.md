@@ -797,21 +797,6 @@ Designed for modern browsers:
 - Mobile Safari
 - Chrome for Android
 
-## AI and Search Friendliness
-
-The project includes discovery files and metadata so search engines and AI tools can understand the library:
-
-- semantic HTML pages
-- canonical URLs
-- Open Graph metadata
-- Twitter card metadata
-- JSON-LD software metadata
-- `robots.txt`
-- `sitemap.xml`
-- `llms.txt`
-- screenshot-backed README
-- public API documentation page
-
 ## Quality Checks
 
 The repository includes a zero-dependency validation script:
