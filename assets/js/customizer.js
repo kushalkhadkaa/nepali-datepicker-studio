@@ -1,3 +1,8 @@
+// =========================================================================
+// Customizer Dashboard JS Core
+// Manages real-time CSS variables injector hooks, datepicker option changes,
+// code generators, and reactive configuration presets state synchronization.
+// =========================================================================
 document.addEventListener('DOMContentLoaded', function() {
       // Theme switcher click listener
       const themeSwitcher = document.getElementById('theme-switcher-btn');
@@ -11,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       let pickerInstance = null;
 
-      // Select DOM Elements
+      // Select DOM Elements for Configuration Controller Mapping
       const themeSelect = document.getElementById('opt-theme');
       const colorPicker = document.getElementById('opt-color');
       const colorHexInput = document.getElementById('opt-color-hex');
