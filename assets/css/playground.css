@@ -1,16 +1,21 @@
+/* =========================================================================
+   Showcase Page Style System Tokens
+   Configures core CSS custom properties for light/dark theme schemes,
+   typography baselines, and global layout resets.
+   ========================================================================= */
 :root {
-      --bg-primary: #090d16;
-      --bg-secondary: #0f1524;
-      --bg-tertiary: #172033;
-      --text-primary: #f3f4f6;
-      --text-secondary: #9ca3af;
-      --text-muted: #6b7280;
-      --accent: #6366f1;
-      --accent-hover: #4f46e5;
-      --border-color: #1f293d;
-      --success: #10b981;
-      --font-sans: 'Roboto Slab', 'Noto Sans Devanagari', serif;
-    }
+  --bg-primary: #090d16;
+  --bg-secondary: #0f1524;
+  --bg-tertiary: #172033;
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --border-color: #1f293d;
+  --success: #10b981;
+  --font-sans: 'Roboto Slab', 'Noto Sans Devanagari', serif;
+}
 
     html.light-theme {
       --bg-primary: #f8fafc;
