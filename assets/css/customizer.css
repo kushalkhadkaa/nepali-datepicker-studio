@@ -366,7 +366,8 @@
     }
 
     .hljs-code {
-      background: #0b0f19;
+      display: block;
+      background: #0f141c;
       border: 1px solid var(--border-color);
       padding: 1.5rem;
       border-bottom-left-radius: 12px;
@@ -376,6 +377,122 @@
       font-family: 'Fira Code', monospace;
       font-size: 0.85rem;
       max-height: 250px;
+    }
+
+    .dev-helper-grid {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .helper-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .helper-card-header {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .helper-card-body {
+      padding: 1rem;
+    }
+
+    .output-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .output-tile {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 0.8rem;
+      min-width: 0;
+    }
+
+    .output-label {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.25rem;
+    }
+
+    .output-value {
+      display: block;
+      color: var(--text-primary);
+      font-size: 0.85rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .snippet-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: #111827;
+      border: 1px solid var(--border-color);
+      border-bottom: none;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+    }
+
+    .snippet-tab {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      border-radius: 999px;
+      padding: 0.35rem 0.7rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .snippet-tab.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .copy-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .copy-actions .btn-copy {
+      background: rgba(99, 102, 241, 0.16);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      color: var(--text-primary);
+      box-shadow: none;
+    }
+
+    .copy-actions .btn-copy:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .dev-mode-note {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      margin-top: 0.35rem;
     }
 
     /* Dynamic CSS Color Overrides Container */
@@ -456,5 +573,14 @@
       }
       .preview-workspace {
         height: auto;
+      }
+      .output-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .output-grid {
+        grid-template-columns: 1fr;
       }
     }

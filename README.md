@@ -157,6 +157,45 @@ new NepaliDatePicker('#date', {
 
 The same API works for single dates, ranges, multiple selection, inline calendars, date-time pickers, and booking flows.
 
+## Developer Widget Code Generator
+
+The live customizer includes a developer-focused widget generator that helps both junior and senior developers move from demo to production faster.
+
+It provides:
+
+- Beginner and advanced developer modes
+- Use-case presets for common workflows
+- Live datepicker preview
+- Selected date output inspector
+- Copyable BS value
+- Copyable AD value
+- Copyable selected-date JSON
+- Full HTML example generator
+- JavaScript-only generator
+- React snippet
+- Laravel Blade snippet
+- Django template snippet
+- PHP form snippet
+- WordPress enqueue/template snippet
+- Backend storage recommendation
+- Downloadable working `.html` example
+
+Available presets:
+
+- Basic Nepali date input
+- Date range picker
+- Hotel check-in / checkout
+- Restaurant reservation
+- Flight departure / return
+- Hospital admission / discharge
+- Event start / end
+- Date of birth / past-only picker
+- Future-only booking date
+- Inline dashboard calendar
+- BS / AD converter widget
+
+The generator is useful because it does not only show a configuration object. It also shows the markup, hidden AD export field, callback structure, framework integration shape, and backend storage approach.
+
 ## System Architecture
 
 Nepali DatePicker Studio is designed as a static, dependency-free frontend library. It does not require a server, database, package manager, or runtime framework. The browser loads one CSS bundle and one JavaScript bundle, then the library attaches datepicker behavior to normal HTML elements.
