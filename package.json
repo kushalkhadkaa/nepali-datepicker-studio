@@ -5,7 +5,8 @@
   "main": "dist/nepali-datepicker.js",
   "style": "dist/nepali-datepicker.css",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "node scripts/validate-release.js",
+    "validate": "node scripts/validate-release.js"
   },
   "repository": {
     "type": "git",
