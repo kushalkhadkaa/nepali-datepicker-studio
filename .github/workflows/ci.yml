@@ -1,0 +1,39 @@
+name: Code Quality CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-type: '18'
+
+    - name: Run JavaScript Syntax Validation
+      run: |
+        echo "Validating JavaScript files..."
+        find dist assets/js src/js -name "*.js" -not -path "**/node_modules/**" | while read file; do
+          node -c "$file" || exit 1
+        done
+        echo "All JavaScript files passed syntax verification!"
+
+    - name: Run CSS Integrity Checks
+      run: |
+        echo "Validating CSS files..."
+        find dist assets/css src/css -name "*.css" -not -path "**/node_modules/**" | while read file; do
+          if [ ! -s "$file" ]; then
+            echo "Error: CSS file $file is empty"
+            exit 1
+          fi
+        done
+        echo "All CSS files passed integrity verification!"
