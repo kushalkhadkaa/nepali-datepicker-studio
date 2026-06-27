@@ -1,0 +1,29 @@
+{
+  "name": "nepali-datepicker-studio",
+  "version": "1.2.0",
+  "description": "The most advanced Bikram Sambat (BS) date picker library for the modern web. Pure vanilla JS, zero dependencies, 22 themes, bilingual Nepali/English UI, and BS-AD conversion.",
+  "main": "dist/nepali-datepicker.js",
+  "style": "dist/nepali-datepicker.css",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kushalkhadkaa/nepali-datepicker-studio.git"
+  },
+  "keywords": [
+    "nepali-datepicker",
+    "nepali-calendar",
+    "bikram-sambat",
+    "datepicker",
+    "calendar",
+    "nepali-date-picker",
+    "vanilla-js"
+  ],
+  "author": "Kushal Khadka <kushalkhadkaa@gmail.com> (https://github.com/kushalkhadkaa)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kushalkhadkaa/nepali-datepicker-studio/issues"
+  },
+  "homepage": "https://kushalkhadkaa.github.io/nepali-datepicker-studio/"
+}
