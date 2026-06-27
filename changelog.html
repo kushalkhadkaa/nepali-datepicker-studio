@@ -60,13 +60,33 @@
     <p class="page-desc">Stay up to date with the latest releases, performance improvements, and fixes for Nepali DatePicker Studio.</p>
 
     <div class="timeline">
+
+      <!-- Version 1.2.0 Maintenance -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <span class="timeline-version-badge" style="background: #6366f1;">v1.2.0</span>
+          <span class="timeline-date">June 27, 2026 (Public Release Maintenance)</span>
+        </div>
+        <div class="timeline-card">
+          <h3 class="timeline-card-title">GitHub Publishing, npm Readiness & Developer Tooling</h3>
+          <ul class="change-list">
+            <li><span class="tag-badge tag-feature">Docs</span><strong>Expanded GitHub README</strong>: Rebuilt the public README with a clearer introduction, screenshot gallery, framework examples, system architecture, conversion algorithm, datepicker lifecycle, backend storage guidance, FAQ, and quality-check instructions.</li>
+            <li><span class="tag-badge tag-feature">Feature</span><strong>TypeScript Declaration File</strong>: Added <code>dist/nepali-datepicker.d.ts</code> so TypeScript-aware editors and future package consumers can discover options, methods, callback signatures, static helpers, converter utilities, and global APIs.</li>
+            <li><span class="tag-badge tag-feature">Feature</span><strong>npm Publish Readiness</strong>: Prepared <code>package.json</code> with <code>types</code>, <code>exports</code>, <code>files</code>, <code>publishConfig</code>, package validation scripts, and <code>npm pack --dry-run</code> support for future npm publishing.</li>
+            <li><span class="tag-badge tag-feature">Test</span><strong>Browser Smoke Tests</strong>: Added optional Playwright browser tests for desktop and mobile Chrome to open the playground, verify picker interaction, validate customizer code generation, check converter helpers, and capture local screenshots.</li>
+            <li><span class="tag-badge tag-fix">Fix</span><strong>Release Validation Hardening</strong>: Extended the release validator to check public files, HTML SEO basics, package entrypoints, TypeScript declarations, npm readiness fields, Playwright config, and browser test source files.</li>
+            <li><span class="tag-badge tag-fix">Fix</span><strong>Repository Hygiene</strong>: Kept private/local-only files out of Git, including <code>src/</code>, generated screenshots, Playwright reports, npm tarballs, editor files, zip archives, and non-README markdown files.</li>
+          </ul>
+        </div>
+      </div>
       
       <!-- Version 1.2.0 -->
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div>
           <span class="timeline-version-badge" style="background: #10b981;">v1.2.0</span>
-          <span class="timeline-date">June 27, 2026 (Latest Release)</span>
+          <span class="timeline-date">June 27, 2026 (Feature Release)</span>
         </div>
         <div class="timeline-card">
           <h3 class="timeline-card-title">Assets Separation, Theme Performance & Dynamic Booking Initialization</h3>
